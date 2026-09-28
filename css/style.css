@@ -1,0 +1,23 @@
+:root{--p:#1B4332;--g:#D4A017;--bg:#F9FAFB;--bd:#E5E7EB;--t2:#4B5563}
+*{box-sizing:border-box}body{margin:0;font:14px/20px 'Public Sans',sans-serif;background:var(--bg);color:#111827}a{color:var(--p);font-weight:600}
+.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.pubmode .shell{grid-template-columns:1fr}.pubmode aside{display:none}
+aside{background:var(--p);padding:16px 8px;position:sticky;top:0;height:100vh}aside a{display:flex;justify-content:space-between;color:#fff;text-decoration:none;padding:10px 12px;border-radius:4px;margin-bottom:2px}
+aside a.on{background:#012d1d;color:#FFC641}aside i{background:#FFC641;color:#261a00;border-radius:9px;padding:0 7px;font-style:normal;font-size:12px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:10px 24px;background:#fff;border-bottom:1px solid var(--bd)}
+main{padding:24px 40px;max-width:1280px}h1{font-size:28px;line-height:36px;margin:0 0 8px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.hero{background:var(--p);color:#fff;border-radius:8px;padding:24px;margin-bottom:16px}.hero h1{margin:0}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}.stat{border-left:3px solid var(--p);padding:12px 16px;background:#fff;border-radius:4px;border:1px solid var(--bd);border-left:3px solid var(--p)}.stat b{display:block;font-size:32px;line-height:38px}
+.bars{display:flex;align-items:flex-end;gap:12px;height:150px}.bars div{flex:1;text-align:center;font-size:12px}.bars span{display:block;background:var(--p);border-radius:2px 2px 0 0}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}th{background:var(--bg);text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--t2);padding:8px;border-bottom:2px solid var(--bd)}td{padding:10px 8px;border-bottom:1px solid var(--bd);vertical-align:top}tr:hover td{background:#F3F4F6}
+.mono{font-feature-settings:"tnum" 1;font-family:'Public Sans',monospace}small{color:var(--t2)}.er{color:#991B1B}
+.bd{display:inline-block;border:1px solid;border-radius:4px;padding:0 6px;font-size:11px;font-weight:600}.ok{background:#DCFCE7;color:#166534;border-color:#BBF7D0}.wn{background:#FEF9C3;color:#854D0E;border-color:#FEF08A}.er.bd{background:#FEE2E2;border-color:#FECACA}.nas{background:#DBEAFE;color:#1D4ED8;border-color:#BFDBFE}.dae{background:#EDE9FE;color:#6D28D9;border-color:#DDD6FE}.des{background:#CCFBF1;color:#115E59;border-color:#99F6E4}
+input,select,textarea{width:100%;border:1px solid #D1D5DB;border-radius:4px;padding:8px 12px;font:inherit;background:#fff}input:focus,select:focus,textarea:focus{outline:2px solid var(--g);outline-offset:0}
+button{border-radius:4px;padding:8px 16px;font:600 14px 'Public Sans';cursor:pointer;border:1px solid #D1D5DB}.b1{background:var(--p);color:#fff;border-color:var(--p)}.b1:hover{background:#143326}.b2{background:#fff}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.bar>*{flex:1;min-width:130px}.bar input{flex:3;min-width:200px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}.fg label{font-weight:600;font-size:12px}.fg .w{grid-column:1/-1}.fg textarea{min-height:64px}
+.pgn{display:flex;justify-content:space-between;align-items:center;padding-top:12px}.kv th{width:200px;text-transform:none;font-size:12px}
+.notif{position:fixed;right:16px;bottom:16px;background:var(--p);color:#fff;padding:12px 16px;border-radius:4px;transform:translateY(80px);opacity:0;transition:.2s;z-index:9}.notif.show{transform:none;opacity:1}.notif.er{background:#991B1B}.notif.warn{background:#854D0E}
+#print{display:none}
+@media(max-width:767px){.shell{grid-template-columns:1fr}aside{position:static;height:auto;display:flex;overflow-x:auto}aside a{white-space:nowrap}main{padding:16px}.top small{display:none}}
+@media print{body>*:not(.shell),aside,.top,main>*:not(#print){display:none!important}.shell{display:block}#print{display:block!important;padding:0}@page{size:A4 landscape}}
