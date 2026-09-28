@@ -30,7 +30,7 @@ function side(k){const n=S.docs.filter(d=>!d.fileUrl).length;$('#side').innerHTM
 // ---- Views ----
 const by=k=>S.docs.reduce((a,d)=>(a[d[k]]=(a[d[k]]||0)+1,a),{});
 const card=(l,n)=>`<div class="stat"><small>${l}</small><b>${n}</b></div>`;
-function stats(){const j=by('jenis'),sup=S.docs.filter(d=>d.tingkat!=='Desa').length;return `<div class="hero"><h1>JDIH Desa Karangpari</h1><p>Transparansi regulasi dan akses produk hukum terbuka bagi seluruh warga desa.</p></div><div class="grid">${card('Total Dokumen',S.docs.length)}${card('Peraturan Desa',j.Perdes||0)}${card('Perkades',j.Perkades||0)}${card('SK Kades',j['SK Kades']||0)}${card('Regulasi Supradesa',sup)}</div>`}
+function stats(){const j=by('jenis'),sup=S.docs.filter(d=>d.tingkat!=='Desa').length;return `<div class="hero"><h1>JDIH Desa Puspahiang</h1><p>Transparansi regulasi dan akses produk hukum terbuka bagi seluruh warga desa.</p></div><div class="grid">${card('Total Dokumen',S.docs.length)}${card('Peraturan Desa',j.Perdes||0)}${card('Perkades',j.Perkades||0)}${card('SK Kades',j['SK Kades']||0)}${card('Regulasi Supradesa',sup)}</div>`}
 function dash(){const yr=by('tahun'),ys=Object.keys(yr).sort(),mx=Math.max(1,...Object.values(yr)),st=by('status'),n=S.docs.length||1;
   return `<h1>Selamat bertugas, ${esc(S.user.name)}</h1>${S.docs.some(d=>!d.fileUrl)?`<div class="card" style="background:#FFF3CD"><b>${S.docs.filter(d=>!d.fileUrl).length} dokumen belum memiliki berkas PDF.</b> <a href="#/incomplete">Tindak lanjuti →</a></div>`:''}${stats()}
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))"><div class="card"><b>Tren penerbitan per tahun</b><div class="bars">${ys.map(y=>`<div>${yr[y]}<span style="height:${yr[y]/mx*110}px"></span>${y}</div>`).join('')}</div></div>
@@ -54,7 +54,7 @@ function form(d){const e=!!d,x=d||JSON.parse(localStorage.eg_draft||'{}'),v=k=>e
 <label>Nomor*<input name="nomor" required value="${v('nomor')}"></label><label>Tahun*<input name="tahun" type="number" required value="${v('tahun')||new Date().getFullYear()}"></label>
 <label>Tanggal Penetapan<input name="tglPenetapan" type="date" value="${esc(String(x.tglPenetapan||'').slice(0,10))}"></label><label>Tanggal Pengundangan<input name="tglPengundangan" type="date" value="${esc(String(x.tglPengundangan||'').slice(0,10))}"></label>
 <label class="w">Judul Lengkap*<input name="judul" required value="${v('judul')}"></label><label class="w">Tentang<textarea name="tentang">${v('tentang')}</textarea></label>
-<label>Instansi / Penerbit<input name="penerbit" value="${v('penerbit')||'Pemerintah Desa Karangpari'}"></label><label>Status Keberlakuan*<select name="status">${opt(STATUS,x.status)}</select></label>
+<label>Instansi / Penerbit<input name="penerbit" value="${v('penerbit')||'Pemerintah Desa Puspahiang'}"></label><label>Status Keberlakuan*<select name="status">${opt(STATUS,x.status)}</select></label>
 <label class="w">Dasar Hukum (Mengingat)<textarea name="dasarHukum">${v('dasarHukum')}</textarea></label><label>Perubahan / Pengganti<select name="perubahan">${opt(['Tidak','Ya'],x.perubahan)}</select></label><label>Lokasi Arsip Fisik<input name="lokasiArsip" value="${v('lokasiArsip')}"></label>
 <label class="w">Keterangan<textarea name="keterangan">${v('keterangan')}</textarea></label><label class="w">Berkas PDF (1 berkas, maks 10 MB)<input type="file" name="file" accept="application/pdf">${x.fileUrl?'<small>Berkas sudah ada; pilih file baru untuk mengganti.</small>':''}</label></div>
 <button class="b1">${e?'Simpan Perubahan':'Simpan & Publikasikan ke Register'}</button> <a href="#/reg">Batal</a></form>`}
@@ -73,7 +73,7 @@ function exp(){return `<h1>Ekspor & Cetak Laporan</h1><div class="card"><div cla
 function doExp(t){const j=$('#ej').value,y=$('#ey').value,b=$('#eb').checked,r=S.docs.filter(d=>(!j||d.jenis===j)&&(!y||String(d.tahun)===y)&&(!b||d.status==='Berlaku'));
   if(t==='csv'){const C=['jenis','tingkat','nomor','tahun','tglPenetapan','judul','penerbit','status','fileUrl','lokasiArsip'],q=v=>{v=String(v??'').slice(0,10000);if(/^[=+\-@]/.test(v))v="'"+v;return`"${v.replace(/"/g,'""')}"`};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+[C.join(','),...r.map(d=>C.map(c=>q(d[c])).join(','))].join('\n')],{type:'text/csv'}));a.download='register-produk-hukum-desa.csv';a.click();return}
-  $('#print').innerHTML=`<div style="text-align:center"><b>PEMERINTAH DESA KARANGPARI</b><br>KECAMATAN CILONGOK, KABUPATEN BANYUMAS<hr><h3>BUKU REGISTER PRODUK HUKUM DESA</h3></div>${tbl(r).replace(/<a [^>]*>.*?<\/a>( · )?/g,'')}<p>Dicetak ${new Date().toLocaleDateString('id-ID')} — Total ${r.length} dokumen</p><p style="text-align:right">Kepala Desa Karangpari<br><br><br>(________________)</p>`;window.print()}
+  $('#print').innerHTML=`<div style="text-align:center"><b>PEMERINTAH DESA PUSPAHIANG</b><br>KECAMATAN PUSPAHIANG, KABUPATEN TASIKMALAYA <hr><h3>BUKU REGISTER PRODUK HUKUM DESA</h3></div>${tbl(r).replace(/<a [^>]*>.*?<\/a>( · )?/g,'')}<p>Dicetak ${new Date().toLocaleDateString('id-ID')} — Total ${r.length} dokumen</p><p style="text-align:right">Kepala Desa Puspahiang<br><br><br>(________________)</p>`;window.print()}
 
 // ---- Boot ----
 addEventListener('hashchange',render);render();sync();initAuth();setInterval(()=>{if(!S.pend&&!document.hidden)sync()},120000);
